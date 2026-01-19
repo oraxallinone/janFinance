@@ -476,7 +476,6 @@
     <Content Include="Views\Calender\CalenderIndex.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\BudgetOverview\GroupBudgetOverview.cshtml" />
-    <None Include="Properties\PublishProfiles\AdminTemplate.pubxml" />
     <Content Include="Views\Default\Dashboard.cshtml" />
     <Content Include="Views\Default\BarChart.cshtml" />
     <Content Include="Views\Upload\Index.cshtml" />
@@ -488,6 +487,8 @@
     <Content Include="Views\Notes\NoteIndex.cshtml" />
     <Content Include="Views\Login\LoginIndex.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Properties\PublishProfiles\Updateed.pubxml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

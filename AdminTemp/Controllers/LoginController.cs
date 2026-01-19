@@ -7,7 +7,7 @@ namespace AdminTemp.Controllers
 {
     public class LoginController : Controller
     {
-        // GET: Login/LoginIndex
+        
         public ActionResult LoginIndex()
         {
             return View();
