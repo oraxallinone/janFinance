@@ -1,7 +1,12 @@
 $(document).ready(function () {
-    $('#email').val('');
-    $('#password').val('');
+    setTimeout(function () {
+        myFunction();
+    }, 500); // 1000 milliseconds = 1 second
 
+    function myFunction() {
+        $('#email').val('');
+        $('#password').val('');
+    }
 
     $('#loginForm').on('submit', function (e) {
         e.preventDefault();

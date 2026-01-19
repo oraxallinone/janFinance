@@ -19,10 +19,11 @@
 
     <!--custome inpuut border style-->
     <style>
-        body{
-            font-size:15px;
-            font-family:'Times New Roman';
+        body {
+            font-size: 15px;
+            font-family: 'Times New Roman';
         }
+
         .floating-label-group {
             position: relative;
             margin-bottom: 25px;
@@ -154,7 +155,8 @@
 
                             <li class="user-footer">
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                <a href="#" class="btn btn-default btn-flat float-end">Sign out</a>
+                                <input id="btnLogout" type="button" class="btn btn-default btn-flat float-end" value="Sign out" />
+
                             </li>
                         </ul>
                     </li>
@@ -167,7 +169,7 @@
             <div class="sidebar-brand">
                 <a href="../index.html" class="brand-link">
                     <img src="~/Content/theme/assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow" />
-                    <span class="brand-text fw-light" style="color: yellow;">AdminLTE 4</span>
+                    <span class="brand-text fw-light" style="color: yellow;">Finance Jan</span>
                 </a>
             </div>
             <div class="sidebar-wrapper">
@@ -236,7 +238,7 @@
                                 </li>
                             </ul>
                         </li>
-                        
+
                         <li class="nav-item @uiOpen">
                             <a href="#" class="nav-link @uiActive">
                                 <i class="nav-icon bi bi-tree-fill"></i>
@@ -265,7 +267,7 @@
                                         <p>Timeline</p>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                         <li class="nav-item @formsOpen">
@@ -312,7 +314,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                
+
                                 <li class="nav-item">
                                     <a href="#" class="nav-link @authActive">
                                         <i class="nav-icon bi bi-box-arrow-in-right"></i>
@@ -333,7 +335,7 @@
                             </ul>
                         </li>
                         <li class="nav-header">DOCUMENTATIONS</li>
-                       
+
                         <li class="nav-item">
                             <a href="@Url.Action("LayoutDmo", "Home")" class="nav-link">
                                 <i class="nav-icon bi bi-grip-horizontal"></i>
@@ -351,9 +353,9 @@
             <!--App Content Header-->
             <div class="app-content-header"> </div>
             <!--start child page  app-content  -->
-            
-                    @RenderBody()
-                    
+
+            @RenderBody()
+
             <!--end child page-->
             <!--end::App Content-->
         </main>
@@ -387,5 +389,7 @@
 
     <script src="~/Content/theme/js/adminlte.js"></script>
     <script src="~/Content/theme/js/SidebarWrapper.js"></script>
+
+  
 </body>
 </html>

@@ -1,5 +1,7 @@
 using System.Web.Mvc;
 using AdminTemp.Service;
+using System.Web;
+using System;
 
 namespace AdminTemp.Controllers
 {
@@ -29,6 +31,30 @@ namespace AdminTemp.Controllers
                 }
             }
             return Json(new { success = false, message = "Invalid credentials or inactive user." });
+        }
+
+        public ActionResult Logout()
+        {
+            // Clear Session
+            Session.Clear();
+            Session.Abandon();
+
+            // Clear Authentication Cookie (if used)
+            if (Request.Cookies[".ASPXAUTH"] != null)
+            {
+                HttpCookie authCookie = new HttpCookie(".ASPXAUTH");
+                authCookie.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(authCookie);
+            }
+
+            // Clear all cookies (optional but safe)
+            foreach (string cookie in Request.Cookies.AllKeys)
+            {
+                Response.Cookies[cookie].Expires = DateTime.Now.AddDays(-1);
+            }
+
+            // Redirect to Login page
+            return RedirectToAction("LoginIndex", "Login");
         }
     }
 }

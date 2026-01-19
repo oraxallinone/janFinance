@@ -206,7 +206,7 @@
                             </li>
 
                             <li class="user-footer">
-                                <a href="#" class="btn btn-default btn-flat float-end">Sign out</a>
+                                <input id="btnLogout" type="button" class="btn btn-default btn-flat float-end" value="Sign out" />
                             </li>
                         </ul>
                     </li>
@@ -295,5 +295,16 @@
 
     <script src="~/Content/theme/js/adminlte.js"></script>
     <script src="~/Content/theme/js/SidebarWrapper.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnLogout').on('click', function (e) {
+                e.preventDefault(); // stop # default behavior
+
+                window.location.href = '@Url.Action("Logout", "Login")';
+            });
+        });
+    </script>
+
 </body>
 </html>
