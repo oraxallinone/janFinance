@@ -3,7 +3,9 @@
 <!--begin::Head-->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>@Page.Title</title>
+    <title>@(ViewBag.Title ?? ViewData["Title"] ?? "Finance")</title>
+    <link rel="icon" type="image/png" sizes="32x32" href='@Url.Content("~/Content/img/financep1.png")' />
+    <link rel="shortcut icon" href='@Url.Content("~/Content/img/financep1.png")' />
 
     <!--Fonts-->
     <link href="~/Content/theme/css/fontsource.css" rel="stylesheet" />
@@ -76,6 +78,20 @@
                 font-size: 12px;
                 color: #333;
             }
+
+
+
+        .ddl-master {
+            width: 170px;
+            color: #c02222;
+            height: 25px;
+            box-shadow: rgb(50 50 93 / 26%) 0px 2px 5px -1px, rgb(0 0 0 / 57%) 0px 2px 3px -1px;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+            border: 0px;
+        }
     </style>
 
 
@@ -83,7 +99,7 @@
 
         $(document).ready(function () {
             //alert('layout load');
-            
+
             $(document).ajaxStart(function () {
                 showLoader();
             });
@@ -109,6 +125,31 @@
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
 
+    @{
+        var curController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+        var curAction = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+
+        // Dashboard group includes several controllers
+        var dashIs = (curController == "Default" || curController == "Calender" || curController == "BudgetOverview" || curController == "BudgetGrouping" || curController == "Budget" || curController == "Upload");
+        var dashOpen = dashIs ? "menu-open" : "";
+        var dashActive = dashIs ? "active" : "";
+        var dashDashboardActive = (curController == "Default" && curAction == "Dashboard") ? "active" : "";
+        var dashBarChartActive = (curController == "Default" && curAction == "BarChart") ? "active" : "";
+        var dashCalenderActive = (curController == "Calender" && curAction == "CalenderIndex") ? "active" : "";
+        var dashGroupBudgetActive = (curController == "BudgetOverview" && curAction == "GroupBudgetOverview") ? "active" : "";
+        var dashBudgetGroupingActive = (curController == "BudgetGrouping" && curAction == "BudgetGroupingIndex") ? "active" : "";
+        var dashBudgetIndexActive = (curController == "Budget" && curAction == "BudgetIndex") ? "active" : "";
+
+        // Master group
+        var masterIs = (curController == "Salary" || curController == "Group");
+        var masterOpen = masterIs ? "menu-open" : "";
+        var masterActive = masterIs ? "active" : "";
+        var masterSalaryActive = (curController == "Salary" && curAction == "SalaryIndex") ? "active" : "";
+        var masterGroupActive = (curController == "Group" && curAction == "GroupIndex") ? "active" : "";
+        var uploadFiles = (curController == "Upload" && curAction == "Index") ? "active" : "";
+
+    }
+
     <div class="app-wrapper">
 
         <!--Header-->
@@ -127,27 +168,27 @@
                 <ul class="navbar-nav ms-auto">
                     <li style="margin-top: 9px;">
 
-                        <select id="searchDDlG1" style="width: 170px; background-color: #9e9e9e; color: white; height: 25px; font-size: 14px;">
-                            <option value="0">--G1 select one--</option>
+                        <select id="searchDDlG1" class="ddl-master">
+                            <option value="0">-- G1 --</option>
                         </select>
                         &nbsp;&nbsp;
-                        <select id="searchDDlG2" style="width: 170px; background-color: #9e9e9e; color: white; height: 25px; font-size: 14px;">
-                            <option value="0">--G2 select one--</option>
+                        <select id="searchDDlG2" class="ddl-master">
+                            <option value="0">-- G2 --</option>
                         </select>
                         &nbsp;&nbsp;
-                        <select id="searchDDlG3" style="width: 170px; background-color: #9e9e9e; color: white; height: 25px; font-size: 14px;">
-                            <option value="0">--G3 select one--</option>
+                        <select id="searchDDlG3" class="ddl-master">
+                            <option value="0">-- G3 --</option>
                         </select>
                         &nbsp;&nbsp;
-                       <select id="searchDDlG4" style="width: 170px; background-color: #9e9e9e; color: white; height: 25px; font-size: 14px;">
-                           <option value="0">--G4 select one--</option>
-                       </select>
+                        <select id="searchDDlG4" class="ddl-master">
+                            <option value="0">-- G4 --</option>
+                        </select>
                     </li>
 
                     <!--Fullscreen Toggle-->
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-lte-toggle="fullscreen">
-                            <i id="lnkMaximize" data-lte-icon="maximize" class="bi bi-arrows-fullscreen" ></i>
+                            <i id="lnkMaximize" data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
                             <i id="lnkMinimize" data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none"></i>
                         </a>
                     </li>
@@ -155,9 +196,8 @@
                     <!--begin::User Menu Dropdown-->
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img style="background-color: #1757876b;" src="~/Content/theme/img/round restaurent icon png.png" class="user-image rounded-circle shadow"
-                                 alt="User Image" />
-                            <span class="d-none d-md-inline">Hari Shing</span>
+                            <img style="background-color: rgba(23, 87, 135, 0.42);" src="~/Content/theme/img/budget.png" class="user-image rounded-circle shadow" alt="User Image" />
+                            <span class="d-none d-md-inline">User</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                             <li class="user-header text-bg-primary">
@@ -166,7 +206,7 @@
                             </li>
 
                             <li class="user-footer">
-                                <a href="#" class="btn btn-default btn-flat float-end">Sign out</a>
+                                <input id="btnLogout" type="button" class="btn btn-default btn-flat float-end" value="Sign out" />
                             </li>
                         </ul>
                     </li>
@@ -189,117 +229,31 @@
                         data-lte-toggle="treeview"
                         role="menu"
                         data-accordion="false">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon bi bi-speedometer"></i>
-                                <p>
-                                    Dashboard
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
+                        <li class="nav-item @dashOpen">
+                            <a href="#" class="nav-link @dashActive"> <i class="nav-icon bi bi-speedometer"></i> <p> Dashboard <i class="nav-arrow bi bi-chevron-right"></i> </p> </a>
+                            
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="@Url.Action("BudgetIndex", "Budget")" class="nav-link">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>Budget</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("BudgetGroupingIndex", "BudgetGrouping")" class="nav-link">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>Budget Grouping</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("CalenderIndex", "Calender")" class="nav-link">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>Calender</p>
-                                    </a>
-                                </li>
+                                <li class="nav-item"> <a href="@Url.Action("Dashboard", "Default")" class="nav-link @dashDashboardActive"> <i class="nav-icon far fa-circle"></i> <p>Dashboard</p> </a> </li>
+                                <li class="nav-item"> <a href="@Url.Action("BarChart", "Default")" class="nav-link @dashBarChartActive"> <i class="nav-icon bi bi-circle"></i> <p>Bar Graph</p> </a> </li>
+                                <li class="nav-item"> <a href="@Url.Action("CalenderIndex", "Calender")" class="nav-link @dashCalenderActive"> <i class="nav-icon bi bi-circle"></i> <p>Calender</p> </a> </li>
+                                <li class="nav-item"> <a href="@Url.Action("GroupBudgetOverview", "BudgetOverview")" class="nav-link @dashGroupBudgetActive"> <i class="nav-icon bi bi-circle"></i> <p>Group Sum</p> </a> </li>
 
+                                <li class="nav-item"> <a href="@Url.Action("Index", "Upload")" class="nav-link @uploadFiles"> <i class="nav-icon bi bi-circle"></i> <p>File Upload</p> </a> </li>
 
-
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "GroupMaster")" class="nav-link">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>Group</p>
-                                    </a>
-                                </li>
-
-
-                                <li class="nav-item">
-                                    <a href="@Url.Action("SalaryIndex", "SalaryMaster")" class="nav-link">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>Salary</p>
-                                    </a>
-                                </li>
+                                <li class="nav-item"> <a href="@Url.Action("BudgetGroupingIndex", "BudgetGrouping")" class="nav-link @dashBudgetGroupingActive"> <i class="nav-icon bi bi-circle"></i> <p>Grouping</p> </a> </li>
+                                <li class="nav-item"> <a href="@Url.Action("BudgetIndex", "Budget")" class="nav-link @dashBudgetIndexActive"> <i class="nav-icon bi bi-circle"></i> <p>Final</p> </a> </li>
+                            </ul>
+                        </li> 
+                        <li class="nav-item @masterOpen">
+                            <a href="#" class="nav-link @masterActive"> <i class="nav-icon bi bi-box-seam-fill"></i> <p> Master <i class="nav-arrow bi bi-chevron-right"></i> </p> </a>
+                            
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item"> <a href="@Url.Action("SalaryIndex", "Salary")" class="nav-link @masterSalaryActive"> <i class="nav-icon bi bi-circle"></i> <p>Salary</p> </a> </li>
+                                <li class="nav-item"> <a href="@Url.Action("GroupIndex", "Group")" class="nav-link @masterGroupActive"> <i class="nav-icon bi bi-circle"></i> <p>Group</p> </a> </li>
                             </ul>
                         </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon bi bi-box-seam-fill"></i>
-                                <p>
-                                    Master
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "MasterData")" class="nav-link">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>Index</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon bi bi-tree-fill"></i>
-                                <p>
-                                    Item
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Registration", "Item")" class="nav-link">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>Add Item</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("List", "Item")" class="nav-link">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>Item List</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon bi bi-pencil-square"></i>
-                                <p>
-                                    Order
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Create", "Order")" class="nav-link">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>Order Create</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("ItemWiseReport", "Order")" class="nav-link">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>Item wise Order Report</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        @* <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-tree-fill"></i> <p> Item <i class="nav-arrow bi bi-chevron-right"></i> </p> </a> <ul class="nav nav-treeview"> <li class="nav-item"> <a href="@Url.Action("Registration", "Item")" class="nav-link"> <i class="nav-icon bi bi-circle"></i> <p>Add Item</p> </a> </li> <li class="nav-item"> <a href="@Url.Action("List", "Item")" class="nav-link"> <i class="nav-icon bi bi-circle"></i> <p>Item List</p> </a> </li> </ul> </li> *@
+                        @* <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-pencil-square"></i> <p> Order <i class="nav-arrow bi bi-chevron-right"></i> </p> </a> <ul class="nav nav-treeview"> <li class="nav-item"> <a href="@Url.Action("Create", "Order")" class="nav-link"> <i class="nav-icon bi bi-circle"></i> <p>Order Create</p> </a> </li> <li class="nav-item"> <a href="@Url.Action("ItemWiseReport", "Order")" class="nav-link"> <i class="nav-icon bi bi-circle"></i> <p>Item wise Order Report</p> </a> </li> </ul> </li>*@
                     </ul>
                 </nav>
             </div>
@@ -324,20 +278,10 @@
         </main>
 
         <!--Footer-->
-        @*<footer class="app-footer">
-            <div class="float-end d-none d-sm-inline">Anything you want</div>
-            <strong>
-                Copyright &copy; 2025&nbsp; AdminLTE.io.
-            </strong>
-            All rights reserved.
-        </footer>*@
+        @*<footer class="app-footer"> <div class="float-end d-none d-sm-inline">Anything you want</div> <strong> Copyright &copy; 2025&nbsp; AdminLTE.io. </strong> All rights reserved. </footer>*@
 
     </div>
     @RenderSection("scripts", required: false)
-
-
-
-
 
 
     <!--begin::Third Party Plugin(OverlayScrollbars)-->
@@ -351,5 +295,16 @@
 
     <script src="~/Content/theme/js/adminlte.js"></script>
     <script src="~/Content/theme/js/SidebarWrapper.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnLogout').on('click', function (e) {
+                e.preventDefault(); // stop # default behavior
+
+                window.location.href = '@Url.Action("Logout", "Login")';
+            });
+        });
+    </script>
+
 </body>
 </html>

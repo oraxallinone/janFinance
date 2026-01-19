@@ -1,4 +1,21 @@
 ﻿$(document).ready(function () {
+    $('#searchDDlG1').hide();
+    $('#searchDDlG2').hide();
+    $('#searchDDlG3').hide();
+    $('#searchDDlG4').hide();
+
+    // set reasonable default scroll area height (no '!important' via jQuery)
+    $(".div-responsive").css("height", "63vh");
+
+    $("#lnkMaximize").click(function () {
+        $(".div-responsive").css("height", "68vh");
+    });
+
+    $("#lnkMinimize").click(function () {
+        $(".div-responsive").css("height", "63vh");
+    });
+
+
     var tbl;
 
     fnClearSalary();
@@ -44,35 +61,39 @@
     function GetAllSalary() {
         
         $.ajax({
-            url: '/SalaryMaster/GetAllSalary',
+            url: '/Salary/GetAllSalary',
             type: 'GET',
             success: function (res) {
                 $("#gridTableSalary tbody").empty();
                 
                 var html = '';
                 var i = 1;
+                var totalSalary = 0;
                 $.each(res, function (idx, item) {
                     let fromDate = item.FromData ? anyToDate(formatDate(item.FromData)) : '';
                     let toDate = item.ToDate ? anyToDate(formatDate(item.ToDate)) : '';
                     let numberOfDays = calculateTheDays(fromDate, toDate) ;
-
+                    totalSalary = totalSalary + item.SalaryAmount;
                     html += '<tr>';
                     html += '<td>' + (i++) + '</td>';
                     html += '<td>' + (numberToMonth(item.MonthName) || '') + '</td>';
                     html += '<td>' + (item.YearName || '') + '</td>';
-                    html += '<td>' + (item.SalaryAmount != null ? item.SalaryAmount : '').toLocaleString('en-IN') + '</td>';
+                    html += '<td id="' + item.SalaryAmount + '" class="salary">' + (item.SalaryAmount != null ? item.SalaryAmount : '').toLocaleString('en-IN') + '</td>';
                     html += '<td>' + (item.Need50 != null ? item.Need50 : '') + '</td>';
                     html += '<td>' + (item.Save20 != null ? item.Save20 : '') + '</td>';
                     html += '<td>' + (item.Want30 != null ? item.Want30 : '') + '</td>';
                     html += '<td>' + fromDate + '</td>';
                     html += '<td>' + toDate + '</td>';
-                    html += '<td>' + (item.OrderRowAll != null ? item.OrderRowAll : '') + ' || ' + numberOfDays + '</td>';
-                    //html += '<td>' + (item.OrderRowYear != null ? item.OrderRowYear : '') + '</td>';
+                    html += '<td>' + (item.OrderRowAll != null ? item.OrderRowAll : '') + ' row count || ' + numberOfDays + ' days</td>';
+
+                    html += '<td class="total-salary">' + (item.SalaryTillNow != null ? item.SalaryTillNow : '').toLocaleString('en-IN') + '</td>';
+
                     html += '<td>';
                     html += '<a href="#" class="me-1"><i class="fa-solid fa-pen-to-square text-warning class-btnUpdateSalary" data-id="' + item.Id + '"></i></a>';
                     html += ' | ';
-                    html += '<a href="#" class="ms-1"><i class="fa-regular fa-trash-can text-danger class-btnDeleteSalary" data-id="' + item.Id + '"></i></a>';
+                    //html += '<a href="#" class="ms-1"><i class="fa-regular fa-trash-can text-danger class-btnDeleteSalary" data-id="' + item.Id + '"></i></a>';
                     html += '</td>';
+
                     html += '</tr>';
                 });
                 $("#gridTableSalary tbody").html(html);
@@ -99,7 +120,7 @@
         var obj = getSalaryFromForm();
         
         $.ajax({
-            url: '/SalaryMaster/InsertSalary',
+            url: '/Salary/InsertSalary',
             type: 'POST',
             data: obj,
             success: function (res) {
@@ -119,7 +140,7 @@
         var obj = getSalaryFromForm();
         obj.Id = $("#hidenSalaryID").val();
         $.ajax({
-            url: '/SalaryMaster/UpdateSalaryById',
+            url: '/Salary/UpdateSalaryById',
             type: 'POST',
             data: obj,
             success: function (res) {
@@ -138,7 +159,7 @@
     function DeleteSalaryById(id) {
         if (!confirm('Delete this record?')) return;
         $.ajax({
-            url: '/SalaryMaster/DeleteSalaryById',
+            url: '/Salary/DeleteSalaryById',
             type: 'POST',
             data: { id: id },
             success: function (res) {
@@ -154,7 +175,7 @@
 
     function GetSalaryById(id) {
         $.ajax({
-            url: '/SalaryMaster/GetSalaryById',
+            url: '/Salary/GetSalaryById',
             type: 'GET',
             data: { id: id },
             success: function (item) {
@@ -383,5 +404,11 @@
         ];
 
         return months[num] || "";
+    }
+
+    function assignSum() {
+        $('.salary').each(function () {
+            alert('oo');
+        });
     }
 });

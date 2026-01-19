@@ -1,4 +1,4 @@
-﻿
+﻿@*|| budget-overview.css || budgetOverview.js ||*@
 @{
     ViewBag.Title = "GroupBudgetOverview";
     Layout = "~/Views/Shared/_WebLayout.cshtml";
@@ -18,6 +18,7 @@
                                 <div class="floating-label-group">
                                     <select class="form-control form-control-sm" id="ddlYear">
                                         <option value="0">--Year--</option>
+                                        <option value="2024">2024</option>
                                         <option value="2025">2025</option>
                                         <option value="2026">2026</option>
                                         <option value="2027">2027</option>
@@ -45,28 +46,27 @@
                             </div>
                         </div>
                         
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
 
-                        <div class="div-responsive">
-                            <table id="gridGroupOverview" class="custom-tbl-common" border="1">
-                                <thead>
-                                    <tr>
-                                        <th style="width:5%">#</th>
-                                        <th style="width:15%;text-align: left">Group Name</th>
-                                        <th style="width:20%;text-align: left">Spending</th>
-                                        <th style="width:20%">Budget</th>
-                                        <th style="">Remain</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                   <tr>
-                                       <td>1</td>
-                                       <td>Food</td>
-                                       <td>2000</td>
-                                       <td>10000</td>
-                                       <td>8000</td>
-                                   </tr>
-                                </tbody>
-                            </table>
+                                <div class="div-responsive">
+                                    <table id="gridGroupOverview" class="custom-tbl-common" border="1">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:7%">#</th>
+                                                <th style="width:25%;text-align: left">Group Name</th>
+                                                <th style="width:20%;text-align: right">Budget</th>
+                                                <th style="width:20%;text-align: right">Spending</th>
+                                                <th style="width:20%;text-align: right">Remain</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           @* <tr><td>1</td><td>Food</td><td>2000</td><td>10000</td><td>8000</td></tr> *@
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                     <div class="card-footer" style="text-align:right;background-color: #1d68a075;">

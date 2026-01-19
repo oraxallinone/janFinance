@@ -1,4 +1,9 @@
 ﻿$(document).ready(function () {
+    $('#searchDDlG1').hide();
+    $('#searchDDlG2').hide();
+    $('#searchDDlG3').hide();
+    $('#searchDDlG4').hide();
+
     Get4Group();
 
     let spendingData = [];
@@ -9,31 +14,51 @@
         getList();
     });
 
-    $('#ddlGroup1').change(function () {
-        //$("#ddlGroup2  option:first").prop("selected", "selected");
-        //$("#ddlGroup3  option:first").prop("selected", "selected");
-        //getList();
+    $(document).on('change', '#ddlYear, #ddlMonth, #ddlUpdateG1, #ddlUpdateG2, #ddlUpdateG3, #ddlUpdateG4', function () {
+
+        const forYear = $('#ddlYear').val();
+        const forMonth = $('#ddlMonth').val();
+
+        const gValues = [
+            $('#ddlUpdateG1').val(),
+            $('#ddlUpdateG2').val(),
+            $('#ddlUpdateG3').val(),
+            $('#ddlUpdateG4').val()
+        ];
+
+        if (!forYear || forYear === "0" || !forMonth || forMonth === "0") {
+            // Year or Month not selected
+            return;
+        }
+
+        // At least one G must be selected (not "0", not empty)
+        const anyGSelected = gValues.some(v => v !== "0" && v !== "" && v !== null);
+
+        if (!anyGSelected) {
+            console.log("Select at least one value from G1, G2, G3, or G4.");
+            return;
+        }
+        else {
+            // Read all G values
+            const gIDs = ['#ddlUpdateG1', '#ddlUpdateG2', '#ddlUpdateG3', '#ddlUpdateG4'];
+
+            // Find selected dropdown that changed
+            const changedID = '#' + this.id;
+            const changedValue = $(changedID).val();
+
+            // If changed value is NOT 0 → reset all others to 0
+            if (changedValue !== "0") {
+                gIDs.forEach(id => {
+                    if (id !== changedID) {
+                        $(id).val("0");
+                    }
+                });
+            }
+        }
+
+        getList();
     });
 
-    $(document).on('change', '#ddlGroup2', function () {
-        //$("#ddlGroup1  option:first").prop("selected", "selected");
-        //$("#ddlGroup3  option:first").prop("selected", "selected");
-        //getList();
-    });
-
-    $('#ddlGroup3').change(function () {
-        //$("#ddlGroup1  option:first").prop("selected", "selected");
-        //$("#ddlGroup2  option:first").prop("selected", "selected");
-        //getList();
-    });
-
-    $('#ddlMonth').change(function () {
-        //getList();
-    });
-
-    $('#ddlYear').change(function () {
-        //getList();
-    });
 
     //#get monthwise dates
     function getList() {

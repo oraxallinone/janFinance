@@ -6,16 +6,17 @@
 
     var screenWidth = window.screen.width;
     console.log(screenWidth);
+    $(".div-responsive").css("height", "67vh");
 
     bindGet4Group();
     GetGroupMasterUncut(); // call on page load
 
     $("#lnkMaximize").click(function () {
-        $(".table-responsive").css("max-height", "69vh");
+        $(".div-responsive").css("height", "72vh");
     });
 
     $("#lnkMinimize").click(function () {
-        $(".table-responsive").css("max-height", "62vh");
+        $(".div-responsive").css("height", "67vh");
     });
 
     $("#btnSaveBudget").click(function () {
@@ -24,12 +25,17 @@
         }
     });
 
-    $("#lnkMinimize").click(function () {
-        $(".table-responsive").css("max-height", "62vh");
+    //
+    $("#ddlMonth").change(function () {
+        GetSalaryByMonthYear();
+    });
+    $("#ddlYear").change(function () {
+        GetSalaryByMonthYear();
     });
 
+
+
     $(".section-salary-div").click(function () {
-        bindData();
         GetSalaryByMonthYear();
     });
 
@@ -248,11 +254,10 @@
                 $.each(res, function (i, item) {
                     crntSum = crntSum + parseFloat(item.Amount);
                     let crntSumFormat = Intl.NumberFormat('en-IN').format(crntSum);
-                    let remainSalary = Intl.NumberFormat('en-IN').format(crntMonthSalary - crntSum);
+                    let remainSalary = crntMonthSalary - crntSum;
 
                     var spendDate = ToDateAndDay(item.SpendDate);
                     var dayClassMain = ToDayExtraction(spendDate);
-
                     html += "<tr>";
 
                     //Date
@@ -262,7 +267,7 @@
                     //#1        
                     html += "<td>  <span class='txt-spend'>" + crntSumFormat + " </span> </td>";
                     //#2        
-                    html += "<td>  <span class='txt-remain'> " + remainSalary + "</span> </td>";
+                    html += "<td>  <span class='txt-remain'> " + Intl.NumberFormat('en-IN').format(remainSalary) + "</span> </td>"; //Intl.NumberFormat('en-IN').format(remainSalary)
                     //#3        
                     html += "<td>  <input type='checkbox' class='budget-checkbox' data-id='" + (item.Id || '') + "' />  </td>";
 
@@ -286,11 +291,15 @@
                 });
 
                 $("#gridTableBudget tbody").html(html);
-                
+
                 const items = document.querySelectorAll(".txt-spend");
                 items[items.length - 1].style.fontWeight = "900";
                 const items2 = document.querySelectorAll(".txt-remain");
                 items2[items2.length - 1].style.fontWeight = "900";
+
+                //tdRemain= crntMonthSalary - crntSum
+                $('#tdSpending').html(Intl.NumberFormat('en-IN').format(crntSum))
+                $('#tdRemain').html(Intl.NumberFormat('en-IN').format(crntMonthSalary - crntSum))
             },
             error: function (xhr, status, err) {
                 console.error('GetAllBudgetFromTo error:', err);
@@ -335,6 +344,7 @@
         $("#ddlYear").val(year);
         $("#ddlMonth").val(month);
 
+        GetSalaryByMonthYear();
     }
 
 
@@ -342,9 +352,11 @@
     function GetSalaryByMonthYear() {
         var yearName = parseInt($("#ddlYear").val(), 10) || 0;
         var monthName = parseInt($("#ddlMonth").val(), 10) || 0;
-
+        if (yearName == 0 || monthName == 0) {
+            return false;
+        }
         $.ajax({
-            url: '/SalaryMaster/GetSalaryByMonthYear',
+            url: '/Salary/GetSalaryByMonthYear',
             type: 'GET',
             data: { monthName: monthName, yearName: yearName },
             dataType: 'json',
@@ -356,6 +368,8 @@
                 $('#tdWantSalary').html(Intl.NumberFormat('en-IN').format(res[0].Want30)).attr('title', res[0].Want30);
 
                 crntMonthSalary = res[0].SalaryAmount;
+
+                bindData();
             },
             error: function (xhr, status, err) {
 

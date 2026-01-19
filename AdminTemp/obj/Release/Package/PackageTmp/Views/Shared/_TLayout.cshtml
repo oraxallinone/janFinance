@@ -19,10 +19,11 @@
 
     <!--custome inpuut border style-->
     <style>
-        body{
-            font-size:15px;
-            font-family:'Times New Roman';
+        body {
+            font-size: 15px;
+            font-family: 'Times New Roman';
         }
+
         .floating-label-group {
             position: relative;
             margin-bottom: 25px;
@@ -72,6 +73,42 @@
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
 
+    @{
+        var curController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+        var curAction = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+
+        // Precompute menu classes to avoid complex inline Razor expressions in attributes
+        var dashOpen = (curController == "Home" && (curAction == "index" || curAction == "index2" || curAction == "index3")) ? "menu-open" : "";
+        var dashActive = (curController == "Home" && (curAction == "index" || curAction == "index2" || curAction == "index3")) ? "active" : "";
+        var dashIndexActive = (curController == "Home" && curAction == "index") ? "active" : "";
+        var dashIndex2Active = (curController == "Home" && curAction == "index2") ? "active" : "";
+        var dashIndex3Active = (curController == "Home" && curAction == "index3") ? "active" : "";
+
+        var widgetsOpen = (curController == "Home" && (curAction == "SmallBox" || curAction == "infobox" || curAction == "cards")) ? "menu-open" : "";
+        var widgetsActive = (curController == "Home" && (curAction == "SmallBox" || curAction == "infobox" || curAction == "cards")) ? "active" : "";
+        var widgetsSmallBoxActive = (curController == "Home" && curAction == "SmallBox") ? "active" : "";
+        var widgetsInfoBoxActive = (curController == "Home" && curAction == "infobox") ? "active" : "";
+        var widgetsCardsActive = (curController == "Home" && curAction == "cards") ? "active" : "";
+
+        var uiOpen = (curController == "Home" && (curAction == "general" || curAction == "icons" || curAction == "Timeline")) ? "menu-open" : "";
+        var uiActive = (curController == "Home" && (curAction == "general" || curAction == "icons" || curAction == "Timeline")) ? "active" : "";
+        var uiGeneralActive = (curController == "Home" && curAction == "general") ? "active" : "";
+        var uiIconsActive = (curController == "Home" && curAction == "icons") ? "active" : "";
+        var uiTimelineActive = (curController == "Home" && curAction == "Timeline") ? "active" : "";
+
+        var formsOpen = (curController == "Home" && curAction == "GeneralElements") ? "menu-open" : "";
+        var formsActive = (curController == "Home" && curAction == "GeneralElements") ? "active" : "";
+        var formsGeneralActive = (curController == "Home" && curAction == "GeneralElements") ? "active" : "";
+
+        var tablesOpen = (curController == "Home" && curAction == "SimpleTables") ? "menu-open" : "";
+        var tablesActive = (curController == "Home" && curAction == "SimpleTables") ? "active" : "";
+        var tablesSimpleActive = (curController == "Home" && curAction == "SimpleTables") ? "active" : "";
+
+        var authOpen = (curController == "Home" && curAction == "lgin2") ? "menu-open" : "";
+        var authActive = (curController == "Home" && curAction == "lgin2") ? "active" : "";
+        var authLogin2Active = (curController == "Home" && curAction == "lgin2") ? "active" : "";
+    }
+
     <div class="app-wrapper">
 
         <!--Header-->
@@ -118,7 +155,8 @@
 
                             <li class="user-footer">
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                <a href="#" class="btn btn-default btn-flat float-end">Sign out</a>
+                                <input id="btnLogout" type="button" class="btn btn-default btn-flat float-end" value="Sign out" />
+
                             </li>
                         </ul>
                     </li>
@@ -131,7 +169,7 @@
             <div class="sidebar-brand">
                 <a href="../index.html" class="brand-link">
                     <img src="~/Content/theme/assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow" />
-                    <span class="brand-text fw-light" style="color: yellow;">AdminLTE 4</span>
+                    <span class="brand-text fw-light" style="color: yellow;">Finance Jan</span>
                 </a>
             </div>
             <div class="sidebar-wrapper">
@@ -141,8 +179,8 @@
                         data-lte-toggle="treeview"
                         role="menu"
                         data-accordion="false">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item @dashOpen">
+                            <a href="#" class="nav-link @dashActive">
                                 <i class="nav-icon bi bi-speedometer"></i>
                                 <p>
                                     Dashboard
@@ -151,27 +189,27 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="@Url.Action("index", "Home")" class="nav-link">
+                                    <a href="@Url.Action("index", "Home")" class="nav-link @dashIndexActive">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>Dashboard v1</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="@Url.Action("index2", "Home")" class="nav-link">
+                                    <a href="@Url.Action("index2", "Home")" class="nav-link @dashIndex2Active">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>Dashboard v2</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="@Url.Action("index3", "Home")" class="nav-link">
+                                    <a href="@Url.Action("index3", "Home")" class="nav-link @dashIndex3Active">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>Dashboard v3</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item @widgetsOpen">
+                            <a href="#" class="nav-link @widgetsActive">
                                 <i class="nav-icon bi bi-box-seam-fill"></i>
                                 <p>
                                     Widgets
@@ -180,29 +218,29 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="@Url.Action("SmallBox", "Home")" class="nav-link">
+                                    <a href="@Url.Action("SmallBox", "Home")" class="nav-link @widgetsSmallBoxActive">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>Small Box</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="@Url.Action("infobox", "Home")" class="nav-link">
+                                    <a href="@Url.Action("infobox", "Home")" class="nav-link @widgetsInfoBoxActive">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>info Box</p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="@Url.Action("cards", "Home")" class="nav-link">
+                                    <a href="@Url.Action("cards", "Home")" class="nav-link @widgetsCardsActive">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>Cards upd</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                        
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+
+                        <li class="nav-item @uiOpen">
+                            <a href="#" class="nav-link @uiActive">
                                 <i class="nav-icon bi bi-tree-fill"></i>
                                 <p>
                                     UI Elements
@@ -211,29 +249,29 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="@Url.Action("general", "Home")" class="nav-link">
+                                    <a href="@Url.Action("general", "Home")" class="nav-link @uiGeneralActive">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>General</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="@Url.Action("icons", "Home")" class="nav-link">
+                                    <a href="@Url.Action("icons", "Home")" class="nav-link @uiIconsActive">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>Icons</p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="@Url.Action("Timeline", "Home")" class="nav-link">
+                                    <a href="@Url.Action("Timeline", "Home")" class="nav-link @uiTimelineActive">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>Timeline</p>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item @formsOpen">
+                            <a href="#" class="nav-link @formsActive">
                                 <i class="nav-icon bi bi-pencil-square"></i>
                                 <p>
                                     Forms
@@ -242,15 +280,15 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="@Url.Action("GeneralElements", "Home")" class="nav-link">
+                                    <a href="@Url.Action("GeneralElements", "Home")" class="nav-link @formsGeneralActive">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>GeneralElements</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item @tablesOpen">
+                            <a href="#" class="nav-link @tablesActive">
                                 <i class="nav-icon bi bi-table"></i>
                                 <p>
                                     Tables
@@ -259,7 +297,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="@Url.Action("SimpleTables", "Home")" class="nav-link">
+                                    <a href="@Url.Action("SimpleTables", "Home")" class="nav-link @tablesSimpleActive">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>Simple Tables</p>
                                     </a>
@@ -267,8 +305,8 @@
                             </ul>
                         </li>
                         <li class="nav-header">EXAMPLES</li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item @authOpen">
+                            <a href="#" class="nav-link @authActive">
                                 <i class="nav-icon bi bi-box-arrow-in-right"></i>
                                 <p>
                                     Auth
@@ -276,9 +314,9 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                
+
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="#" class="nav-link @authActive">
                                         <i class="nav-icon bi bi-box-arrow-in-right"></i>
                                         <p>
                                             Version 2
@@ -287,7 +325,7 @@
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="@Url.Action("lgin2", "Home")" class="nav-link">
+                                            <a href="@Url.Action("lgin2", "Home")" class="nav-link @authLogin2Active">
                                                 <i class="nav-icon bi bi-circle"></i>
                                                 <p>Login2</p>
                                             </a>
@@ -297,7 +335,7 @@
                             </ul>
                         </li>
                         <li class="nav-header">DOCUMENTATIONS</li>
-                       
+
                         <li class="nav-item">
                             <a href="@Url.Action("LayoutDmo", "Home")" class="nav-link">
                                 <i class="nav-icon bi bi-grip-horizontal"></i>
@@ -315,9 +353,9 @@
             <!--App Content Header-->
             <div class="app-content-header"> </div>
             <!--start child page  app-content  -->
-            
-                    @RenderBody()
-                    
+
+            @RenderBody()
+
             <!--end child page-->
             <!--end::App Content-->
         </main>
@@ -351,5 +389,7 @@
 
     <script src="~/Content/theme/js/adminlte.js"></script>
     <script src="~/Content/theme/js/SidebarWrapper.js"></script>
+
+  
 </body>
 </html>

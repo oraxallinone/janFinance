@@ -1,4 +1,9 @@
 ﻿$(document).ready(function () {
+    $('#searchDDlG1').hide();
+    $('#searchDDlG2').hide();
+    $('#searchDDlG3').hide();
+    $('#searchDDlG4').hide();
+
     fnClearGroup();   // Reset form
     fnGetGroup();     // Load initial table
 
@@ -30,18 +35,23 @@
         var gtype = $("#txtGroupType").val();
 
         $.ajax({
-            url: "/GroupMaster/GetGroup",
+            url: "/Group/GetGroup",
             type: "GET",
             data: { groupType: gtype },
             success: function (res) {
+                // If a DataTable instance exists, destroy it BEFORE replacing tbody
+                if ($.fn.DataTable.isDataTable('#gridTableGroup')) {
+                    $('#gridTableGroup').DataTable().clear().destroy();
+                }
 
+                $("#gridTableGroup tbody").empty();
                 var html = "";
                 var i = 1;
 
                 $.each(res, function (index, item) {
-                    let c = assignClass(item.GroupType);//"style='background-color: red'";
-                    html += "<tr class='" + assignClass(item.GroupType) + "'>";
-                    html += "<td " + c + " >" + (i++) + "</td>";
+                    let c = assignClass(item.GroupType); // returns style string or empty
+                    html += "<tr " + c + ">";
+                    html += "<td style='width: 15px !important;' " + c + " >" + (i++) + "</td>";
                     html += "<td " + c + " >" + item.GroupName + "</td>";
                     html += "<td " + c + " >" + item.GroupType + "</td>";
                     html += "<td " + c + " >" + (item.IsActive ? 1 : 0) + "</td>";
@@ -81,13 +91,13 @@
         };
 
         $.ajax({
-            url: "/GroupMaster/AddGroup",
+            url: "/Group/AddGroup",
             type: "POST",
             data: obj,
             success: function (res) {
-                alert("Added Successfully. ID = " + res.Id);
-                fnGetGroup();
+                //alert("Added Successfully. ID = " + res.Id);
                 fnClearGroup();   // Reset form
+                fnGetGroup();
             }
         });
     }
@@ -104,13 +114,12 @@
         };
 
         $.ajax({
-            url: "/GroupMaster/UpdateGroup",
+            url: "/Group/UpdateGroup",
             type: "POST",
             data: obj,
             success: function (res) {
-                alert("Updated Successfully");
-                fnGetGroup();
                 fnClearGroup();   // Reset form
+                fnGetGroup();
             }
         });
     }
@@ -130,7 +139,7 @@
             if (result.isConfirmed) {
 
                 $.ajax({
-                    url: "/GroupMaster/DeleteGroup",
+                    url: "/Group/DeleteGroup",
                     type: "POST",
                     data: { id: id },
                     success: function (res) {
@@ -148,7 +157,7 @@
     //fill for update
     function fnGetGroupById(id) {
         $.ajax({
-            url: "/GroupMaster/GroupById",
+            url: "/Group/GroupById",
             type: "GET",
             data: { id: id },
             success: function (item) {
@@ -206,13 +215,61 @@
     var tbl;
 
     function initDataTable() {
-        tbl = $("#gridUnit").DataTable({
+
+        // add filter row under the header if not present
+        if ($('#gridTableGroup thead tr.filter-row').length === 0) {
+            var filterRow = '<tr class="filter-row">';
+            $('#gridTableGroup thead th').each(function () {
+                var $th = $(this);
+                if ($th.hasClass('no-filter')) {
+                    filterRow += '<th></th>';
+                } else {
+                    filterRow += '<th><input type="text" class="form-control form-control-sm column-search" placeholder="Search" /></th>';
+                }
+            });
+            filterRow += '</tr>';
+            $('#gridTableGroup thead').append(filterRow);
+        }
+
+        tbl = $('#gridTableGroup').DataTable({
             destroy: true,
-            pageLength: 10,
+            pageLength: 50,
             searching: true,
-            ordering: true,
-            lengthMenu: [5, 10, 20, 50]
+            ordering: false,
+            lengthMenu: [5, 10, 20, 50],
+            order: [],
+            columnDefs: [
+                { targets: 'no-search', searchable: false },
+                { targets: -1, searchable: false, orderable: false }
+            ]
         });
+
+        // wire up column search inputs
+        tbl.columns().every(function () {
+            var that = this;
+            var idx = this.index();
+            var $input = $('#gridTableGroup thead tr.filter-row th').eq(idx).find('input');
+            if ($input.length) {
+                $input.on('keyup change clear', function () {
+                    var val = $(this).val();
+                    if (that.search() !== val) {
+                        that.search(val).draw();
+                    }
+                });
+            }
+        });
+
+        // Ensure any previous filters/searches are cleared so full dataset is shown
+        try {
+            $('#gridTableGroup thead tr.filter-row input').val('');
+            tbl.search('').columns().search('');
+            tbl.page('first').draw(false);
+            // final draw to reflect cleared searches
+            tbl.draw(false);
+        } catch (e) {
+            // fail silently if table operations error
+            console.warn('DataTable reset warning:', e);
+        }
     }
 
 });

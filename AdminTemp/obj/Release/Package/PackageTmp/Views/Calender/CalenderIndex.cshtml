@@ -1,4 +1,5 @@
-﻿
+﻿@*|| calender-css.css || calender.js ||*@
+
 @{
     ViewBag.Title = "CalenderIndex";
     Layout = "~/Views/Shared/_WebLayout.cshtml";
@@ -13,12 +14,10 @@
             <div class="col-md-12">
                 <div class="card card-primary card-outline mb-4">
                     <div class="card-header">
-                        <div class="card-title">Group</div>
-                        <br />
                         <table>
                             <tr>
                                 <td>
-                                    <select class="form-control form-control-sm" id="ddlYear">
+                                    <select class="form-control form-control-sm wd-std" id="ddlYear">
                                         <option value="0">--Year--</option>
                                         <option value="2024">2024</option>
                                         <option value="2025">2025</option>
@@ -27,7 +26,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <select class="form-control form-control-sm" id="ddlMonth">
+                                    <select class="form-control form-control-sm wd-std" id="ddlMonth">
                                         <option value="0">--Month--</option>
                                         <option value="1">January</option>
                                         <option value="2">February</option>
@@ -45,33 +44,32 @@
                                 </td>
                                 <td> ||| </td>
                                 <td>
-                                    <select class="ddl-group form-control form-control-sm" id="ddlUpdateG1">
+                                    <select class="ddl-group form-control form-control-sm wd-std" id="ddlUpdateG1">
                                         <option value="0">--- G1 ---</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <select class="ddl-group form-control form-control-sm" id="ddlUpdateG2">
+                                    <select class="ddl-group form-control form-control-sm wd-std" id="ddlUpdateG2">
                                         <option value="0">--- G2 ---</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <select class="ddl-group form-control form-control-sm" id="ddlUpdateG3">
+                                    <select class="ddl-group form-control form-control-sm wd-std" id="ddlUpdateG3">
                                         <option value="0">--- G3 ---</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <select class="ddl-group form-control form-control-sm" id="ddlUpdateG4">
+                                    <select class="ddl-group form-control form-control-sm wd-std" id="ddlUpdateG4">
                                         <option value="0">--- G4 ---</option>
                                     </select>
-
                                 </td>
                                 <td>
-                                    <button id="btnCalederSearch" class="btn btn-success btn-sm"> search</button>
+                                    <button id="btnCalederSearch" class="btn btn-success btn-sm wd-std"> Search</button>
                                 </td>
-
                             </tr>
                         </table>
                     </div>
+
                     <div class="card-body">
                         <div class="row">
 
@@ -99,17 +97,6 @@
         </div>
     </div>
 </div>
-
-<script>
-
-    $(document).ready(function () {
-
-        
-
-       
-    });
-
-</script>
 
 <script src="~/Scripts/calender.js"></script>
 

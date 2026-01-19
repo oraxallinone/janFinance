@@ -1,82 +1,23 @@
-﻿
+﻿@*|| salary.css || salary.js ||*@
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "SalaryIndex";
     Layout = "~/Views/Shared/_WebLayout.cshtml";
 }
+<link href="~/Content/salary.css" rel="stylesheet" />
 
-<link href="~/Content/allinOne.css" rel="stylesheet" />
-<style>
-    
-
-    /* optional: ensure cells maintain alignment with header during horizontal scroll */
-    #gridTableGroup {
-        width: 100%;
-        table-layout: auto; /* or `fixed` if you want fixed column widths */
-    }
-
-    /* custome*/
-    .wd-btn {
-        width: 75px;
-    }
-
-    .custom-tbl {
-        font-size: 13px;
-        font-family: 'Times New Roman';
-    }
-    /* custome*/
-
-    /* ------------------ Fixed header (scrollable body) ------------------
-       - Keep the current <div class="table-responsive" style="height: ..."> wrapper.
-       - This CSS makes the wrapper scrollable and sticks the thead to top when you
-         scroll the tbody. Works well with Bootstrap and preserves column widths.
-       - Ensure this style block is included after Bootstrap CSS (it is, in the view).
-    --------------------------------------------------------------------- */
-
-    /* make the responsive wrapper scrollable (use the same height you had) */
-    .table-responsive {
-        max-height: 54vh; /* same as current inline value; move here if preferred */
-        overflow: auto;
-    }
-
-        /* stick the header to top of the scrollable area */
-        .table-responsive #gridTableGroup thead th {
-            position: sticky;
-            top: 0;
-            z-index: 5;
-            background: #ffffff; /* set header background to override table rows */
-            box-shadow: 0 2px 3px rgba(0,0,0,.08);
-        }
-
-        /* optional: keep header text readable and prevent wrapping */
-        .table-responsive #gridTableGroup thead th {
-            white-space: nowrap;
-        }
-
-    /* optional: ensure cells maintain alignment with header during horizontal scroll */
-    #gridTableGroup {
-        width: 100%;
-        table-layout: auto; /* or `fixed` if you want fixed column widths */
-    }
-
-    .table-header-yellow {
-        background-color: yellow; /* Set header background to yellow */
-    }
-</style>
 <div class="app-content">
     <div class="container-fluid">
         <div class="row g-4">
 
             <div class="col-md-12">
                 <div class="card card-primary card-outline mb-4">
-                    <div class="card-header"><div class="card-title">Salary</div></div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 col-sm-6 col-md-4 col-lg-2">
                                 <div class="floating-label-group">
-                                    @*<input type="text" class="form-control form-control-sm" id="txtMonthName" placeholder="" />
-                                    <label for="txtMonthName">Month Name</label>*@
                                     <select class="form-control form-control-sm" id="txtMonthName">
-                                        <option value="0" >--Month--</option>
+                                        <option value="0">--Month--</option>
                                         <option value="1">January</option>
                                         <option value="2">February</option>
                                         <option value="3">March</option>
@@ -158,8 +99,8 @@
                         </div>
 
 
-                        <div class="table-responsive">
-                            <table id="gridTableSalary" class="table table-hover  custom-tbl">
+                        <div class="div-responsive">
+                            <table id="gridTableSalary" class="table table-hover  custom-tbl" style="text-align: right;">
                                 <thead>
                                     <tr>
                                         <th style="width: 10px">#</th>
@@ -172,13 +113,11 @@
                                         <th>From Data</th>
                                         <th>To Date</th>
                                         <th>Order Row All</th>
-                                        @*<th>Order Row Year</th>*@
+                                        <th>+</th>
                                         <th style="width: 105px">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-
-                                </tbody>
+                                <tbody></tbody>
                             </table>
                         </div>
                     </div>

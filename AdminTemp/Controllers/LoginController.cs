@@ -27,7 +27,7 @@ namespace AdminTemp.Controllers
                 }
                 else if (result.UserType == 1 || result.UserType == 2)
                 {
-                    return Json(new { success = true, redirectUrl = Url.Action("Index", "Home") });
+                    return Json(new { success = true, redirectUrl = Url.Action("Index", "Product", new { area = "GstBill" }) });
                 }
             }
             return Json(new { success = false, message = "Invalid credentials or inactive user." });

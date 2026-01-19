@@ -1,4 +1,16 @@
 ﻿$(document).ready(function () {
+    var screenWidth = window.screen.width;
+    console.log(screenWidth);
+    $(".div-responsive").css("height", "63vh", "important");
+
+    $("#lnkMaximize").click(function () {
+        $(".div-responsive").css("height", "69vh", "important");
+    });
+
+    $("#lnkMinimize").click(function () {
+        $(".div-responsive").css("height", "63vh", "important");
+    });
+
     var selectedBudgetIds = [];  // Global array to store selected IDs
 
     // global container for uncut group list (name requested)
@@ -39,13 +51,7 @@
 
     Get4Group();
 
-    $("#lnkMaximize").click(function () {
-        $(".table-responsive").css("max-height", "69vh");
-    });
-
-    $("#lnkMinimize").click(function () {
-        $(".table-responsive").css("max-height", "62vh");
-    });
+   
 
     $("#btnSaveBudget").click(function () {
         if (validateBudget()) {
@@ -89,8 +95,10 @@
         // Show/hide update button based on selection
         if (selectedBudgetIds.length > 0) {
             $("#btnUpdateBudgetGroup").show();
+            $('#divDDLMulti').show()
         } else {
             $("#btnUpdateBudgetGroup").hide();
+            $('#divDDLMulti').hide()
         }
 
         console.log("Selected Budget IDs:", selectedBudgetIds);
@@ -176,7 +184,6 @@
             G3: 0,
             G4: 0
         };
-        debugger
         $.ajax({
             url: "/Budget/InsertBudget",
             type: "POST",
@@ -287,6 +294,7 @@
                 if (res) {
                     bindBudgetDetails(res); // Bind the result to the fields
                     $("#btnSaveBudget").hide();
+                    $('#divDDLSingle').show();
                 } else {
                     alert("Budget not found.");
                 }
@@ -342,6 +350,7 @@
                     // refresh list and reset UI
                     GetAllBudgetFromToWithGroup();
                     $("#btnUpdateBudgetGroupSingle").hide();
+                    $('#divDDLSingle').hide()
                     $("#btnSaveBudget").show();
                     fnClearAmtDetails();
                     $("#hidenBudgetID").val("");
@@ -523,6 +532,9 @@
                             $("#ddlUpdateG4Group").append($('<option></option>').attr('value', item.GroupId).text(item.GroupName));
                         });
                     }
+
+                    $('#divDDLSingle').hide()
+                    $('#divDDLMulti').hide()
                 }
             },
             error: function (xhr, status, error) {

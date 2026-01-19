@@ -1,0 +1,89 @@
+﻿@model AdminTemp.Areas.GstBill.Models.ItemMaster
+@{
+    ViewBag.Title = "ItemEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "editItemForm" }))
+{
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        @using (Html.BeginForm())
+                        {
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">Quick Example</h3>
+                                </div>
+                                <div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputEmail1">Item Code</label>
+                                                @Html.HiddenFor(m => m.ItemId)
+                                                @Html.TextBoxFor(m => m.ItemCode, new { placeholder = "Item Code", @class = "form-control form-control-sm", @readonly = "readonly" })
+                                                @Html.ValidationMessageFor(m => m.ItemCode, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="exampleInputEmail1">Item Name</label>
+                                                @Html.TextBoxFor(m => m.ItemDetails, new { placeholder = "Item Name", @class = "form-control form-control-sm" })
+                                                @Html.ValidationMessageFor(m => m.ItemDetails, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputEmail1">HSN/SAC</label>
+                                                @Html.TextBoxFor(m => m.HSN, new { placeholder = "HSN/ SAC", @class = "form-control form-control-sm" })
+                                                @Html.ValidationMessageFor(m => m.HSN, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputEmail1">Rate</label>
+                                                @Html.TextBoxFor(m => m.Rate, new { type = "number", placeholder = "Rate", @class = "form-control form-control-sm" })
+                                                @Html.ValidationMessageFor(m => m.Rate, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputEmail1">Gst</label>
+                                                @Html.HiddenFor(m => m.Gst)
+                                                <select class="form-control form-control-sm" id="itemGstValue" name="itemGstValue">
+                                                    <option value="-1">-- Select One --</option>
+                                                    <option value="0">0</option>
+                                                    <option value="5">5</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputEmail1">IsActive For Transaction</label>
+                                                @Html.CheckBoxFor(m => m.IsActive, new { @class = "form-control form-control-sm" })
+                                                @if (Model != null && Model.IsActive != null && Model.IsActive == true)
+                                                {
+                                                    <span class="acCustomer text-green">(Active)</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="acCustomer text-red">(Inactive)</span>
+                                                }
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="card-footer">
+                                        @if (ViewBag.isPresent != null)
+                                        { <span class="bg-red btn btn-sm">@ViewBag.isPresent</span> }
+                                        <button type="submit" id="updateItem" class="btn btn-sm btn-info w104">Update</button>
+                                        <a href="/GstBill/Product/ItemList" class="btn btn-sm btn-outline-danger w104">Back</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+}
+
+<aside class="control-sidebar control-sidebar-dark"></aside>
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+
+
