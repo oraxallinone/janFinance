@@ -16,7 +16,7 @@ namespace AdminTemp
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Login", action = "LoginIndex", id = UrlParameter.Optional }
+                defaults: new { controller = "Login2", action = "LoginIndex2", id = UrlParameter.Optional }
             );
         }
     }

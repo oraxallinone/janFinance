@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>D:\sync with git hub\After 2025 Oct 24\pb&amp;up&amp;dt__\combineMano_budget\publish\19jan2026_6</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\sync with git hub\After 2025 Oct 24\pb&amp;up&amp;dt__\combineMano_budget\publish\19jan2026_8</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/GstBill/Models/Model1.edmx.diagram">
@@ -55,10 +55,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2026 10:26:59</publishTime>
     </File>
     <File Include="bin/AdminTemp.dll">
-      <publishTime>01/19/2026 16:55:39</publishTime>
+      <publishTime>01/19/2026 18:12:13</publishTime>
     </File>
     <File Include="bin/AdminTemp.pdb">
-      <publishTime>01/19/2026 16:55:39</publishTime>
+      <publishTime>01/19/2026 18:12:13</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>01/19/2026 10:27:00</publishTime>
@@ -646,7 +646,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2026 10:27:00</publishTime>
     </File>
     <File Include="Views/Login/LoginIndex.cshtml">
-      <publishTime>01/19/2026 16:55:35</publishTime>
+      <publishTime>01/19/2026 17:29:14</publishTime>
+    </File>
+    <File Include="Views/Login/LoginIndex2.cshtml">
+      <publishTime>01/19/2026 17:43:15</publishTime>
+    </File>
+    <File Include="Views/Login2/LoginIndex2.cshtml">
+      <publishTime>01/19/2026 17:37:32</publishTime>
     </File>
     <File Include="Views/MasterData/Index.cshtml">
       <publishTime>01/19/2026 10:27:00</publishTime>
@@ -670,7 +676,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2026 15:34:39</publishTime>
     </File>
     <File Include="Views/Shared/_LoginLayout.cshtml">
-      <publishTime>01/19/2026 16:55:00</publishTime>
+      <publishTime>01/19/2026 17:14:25</publishTime>
     </File>
     <File Include="Views/Shared/_TLayout.cshtml">
       <publishTime>01/19/2026 11:29:23</publishTime>
@@ -682,10 +688,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2026 10:27:00</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>01/19/2026 16:56:43</publishTime>
+      <publishTime>01/19/2026 17:23:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/19/2026 16:48:17</publishTime>
+      <publishTime>01/19/2026 18:13:14</publishTime>
     </File>
   </ItemGroup>
 </Project>

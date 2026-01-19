@@ -197,44 +197,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\GstBill\Controllers\InvoiceController.cs" />
-    <Compile Include="Areas\GstBill\Controllers\ProductController.cs" />
-    <Compile Include="Areas\GstBill\GstBillAreaRegistration.cs" />
-    <Compile Include="Areas\GstBill\Models\BillSupport.cs" />
-    <Compile Include="Areas\GstBill\Models\CounterMaster.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\GstBill\Models\CustomerBillDTO.cs" />
-    <Compile Include="Areas\GstBill\Models\CustomerDTO.cs" />
-    <Compile Include="Areas\GstBill\Models\CustomerInformation.cs" />
-    <Compile Include="Areas\GstBill\Models\CustomerMaster.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\GstBill\Models\InvoiceDetail.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\GstBill\Models\InvoiceGstViewModel.cs" />
-    <Compile Include="Areas\GstBill\Models\ItemMaster.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\GstBill\Models\ItemTransaction.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\GstBill\Models\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\GstBill\Models\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\GstBill\Models\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\BirthdayController.cs" />
     <Compile Include="Controllers\BudgetController.cs" />
     <Compile Include="Controllers\BudgetGroupingController.cs" />
@@ -245,6 +207,7 @@
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\Login2Controller.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MasterDataController.cs" />
     <Compile Include="Controllers\NotesController.cs" />
@@ -281,16 +244,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\GstBill\Models\Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Areas\GstBill\Models\Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
     <Content Include="Content\application-css\common-date-format.css" />
     <Content Include="Content\application-css\loader.css" />
     <Content Include="Content\barchart.css" />
@@ -429,7 +382,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\GstBill\Views\Shared\" />
     <Folder Include="Views\GraphByGroup\" />
   </ItemGroup>
   <ItemGroup>
@@ -437,27 +389,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-    <Content Include="Areas\GstBill\Views\web.config" />
-    <EntityDeploy Include="Areas\GstBill\Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Areas\GstBill\Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <Content Include="Areas\GstBill\Views\Product\Index.cshtml" />
-    <Content Include="Areas\GstBill\Views\Product\CustomerList.cshtml" />
-    <Content Include="Areas\GstBill\Views\Product\CustomerAdd.cshtml" />
-    <Content Include="Areas\GstBill\Views\Product\CustomerView.cshtml" />
-    <Content Include="Areas\GstBill\Views\Product\CustomerEdit.cshtml" />
-    <Content Include="Areas\GstBill\Views\Product\ItemAdd.cshtml" />
-    <Content Include="Areas\GstBill\Views\Product\ItemList.cshtml" />
-    <Content Include="Areas\GstBill\Views\Product\ItemEdit.cshtml" />
-    <Content Include="Areas\GstBill\Views\Product\ItemView.cshtml" />
-    <Content Include="Areas\GstBill\Views\Invoice\GstInvoiceCreate.cshtml" />
-    <Content Include="Areas\GstBill\Views\Invoice\GstDraftList.cshtml" />
-    <Content Include="Areas\GstBill\Views\Invoice\GstInvoiceList.cshtml" />
-    <Content Include="Areas\GstBill\Views\Invoice\GstInvoicePrint.cshtml" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Shared\_WebLayout.cshtml" />
     <Content Include="Views\Item\Registration.cshtml" />
@@ -489,6 +420,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <None Include="Properties\PublishProfiles\Updateed.pubxml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Login\LoginIndex2.cshtml" />
+    <Content Include="Views\Login2\LoginIndex2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -2,12 +2,16 @@ using System.Web.Mvc;
 using AdminTemp.Service;
 using System.Web;
 using System;
+//using AdminTemp.Areas.GstBill.Models;
 
 namespace AdminTemp.Controllers
 {
     public class LoginController : Controller
     {
-        
+        public ActionResult LoginIndex2()
+        {
+            return View();
+        }
         public ActionResult LoginIndex()
         {
             return View();

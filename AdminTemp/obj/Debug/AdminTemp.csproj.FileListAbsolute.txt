@@ -210,6 +210,8 @@ D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\System.Web.W
 D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\System.Web.WebPages.dll
 D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\System.Web.WebPages.Razor.dll
 D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\WebGrease.dll
+D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\EntityFramework.xml
+D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\EntityFramework.SqlServer.xml
 D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\Microsoft.AI.DependencyCollector.xml
 D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\Microsoft.AI.ServerTelemetryChannel.xml
 D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\Microsoft.AI.Web.xml
@@ -225,8 +227,6 @@ D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\System.Web.W
 D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\System.Web.WebPages.Razor.xml
 D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\Antlr3.Runtime.pdb
 D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\Newtonsoft.Json.xml
-D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\EntityFramework.xml
-D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\EntityFramework.SqlServer.xml
 D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\Microsoft.AspNet.Identity.Core.xml
 D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\Microsoft.AspNet.Identity.Owin.xml
 D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\Microsoft.AspNet.Identity.EntityFramework.xml
@@ -239,6 +239,5 @@ D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\Microsoft.Ow
 D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\Microsoft.Owin.Security.Google.xml
 D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\Microsoft.Owin.Security.Twitter.xml
 D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\obj\Debug\AdminTemp.csprojResolveAssemblyReference.cache
 D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\obj\Debug\AdminTemp.dll
 D:\sync with git hub\After 2025 Oct 24\AdminWithLogin\AdminTemp\obj\Debug\AdminTemp.pdb
