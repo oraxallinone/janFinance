@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace HotelBill.Models
+namespace AdminTemp.Areas.GstBill.Models
 {
     public class InvoiceGstViewModel
     {

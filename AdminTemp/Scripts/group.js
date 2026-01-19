@@ -118,7 +118,6 @@
             type: "POST",
             data: obj,
             success: function (res) {
-                debugger
                 fnClearGroup();   // Reset form
                 fnGetGroup();
             }

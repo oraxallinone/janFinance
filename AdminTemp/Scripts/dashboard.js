@@ -27,7 +27,6 @@
 
     // Load on year/month change
     $("#ddlYear, #ddlMonth").on("change", function () {
-        debugger
         LoadDashboardData();
     });
 
@@ -117,7 +116,6 @@
         });
 
         $("#gridGroupBreakdown tbody").html(tableHtml);
-        debugger
         // Update dashboard cards
         var totalRemaining = totalBudget - totalSpent;
         var totalPercentage = totalBudget > 0 ? ((totalSpent / totalBudget) * 100).toFixed(1) : 0;
